@@ -64,8 +64,8 @@
 
 | 순위 | 선수 | 소속 | 적합도 점수 | 비고 |
 |---|---|---|---|---|
-| 🥇 | Mateus Fernandes | West Ham Utd | **0.641** | 수비·체력 만점, 압박저항 보완 필요 |
-| 🥈 | Sandro Tonali | Newcastle Utd | **0.633** | 클린한 수비, 균형 잡힌 프로파일 |
+| 🥇 | Mateus Fernandes | West Ham Utd | **0.800** | 육각형 완벽한 미드필더, 우선영입 대상 |
+| 🥈 | Sandro Tonali | Newcastle Utd | **0.552** | 클린한 수비, 균형 잡힌 프로파일 |
 | — | Mason Mount | Man Utd | 0.161 | 음성 대조군 — 앵커 역할 부적합 확인 |
 
 **Mason Mount가 최하위로 나온 것은 모델의 변별력을 검증하는 음성 대조군 역할입니다.**
@@ -85,7 +85,7 @@
 | 다중 객체 추적 | ByteTrack (supervision) |
 | 팀 분류 | SigLIP + UMAP + KMeans |
 | 피치 캘리브레이션 | 호모그래피 (ViewTransformer) |
-| 이벤트 데이터 | soccerdata (FBref 스크래핑) |
+| 이벤트 데이터 | soccerdata + WhoScored (수동 수집) |
 | 분석·시각화 | pandas, numpy, matplotlib |
 | 개발 환경 | Python 3.11, Apple Silicon MPS |
 
@@ -101,6 +101,7 @@ manutd-cm-scouting/
 ├── notebooks/
 │   ├── 01_position_analysis.ipynb    # 위치 데이터 분석 (히트맵·산점도)
 │   └── 02_scoring_model.ipynb        # 적합도 점수 모델 (레이더·바 차트)
+│   └── 03_whoscored_scoring_model.ipynb        # 적합도 점수 모델
 ├── scripts/
 │   └── extract_coordinates.py        # CV 좌표 추출 스크립트
 └── requirements.txt
@@ -136,7 +137,6 @@ jupyter lab
 3. 3명 기준 MinMax 정규화 — 리그 전체 분포 기준으로 보강 시 더 견고해짐
 
 **향후 계획**
-- [ ] FBref `passing`·`possession` 데이터 확보 → 운반·전진 실측값 교체
 - [ ] 후보 선수 영상 확보 → CV 지표와 이벤트 지표 결합
 - [ ] 타깃 B(마이누 백업) 버전 — 가중치 전환으로 두 번째 순위표 생성
 - [ ] K리그 버전 파이프라인 일반화 데모
@@ -145,7 +145,7 @@ jupyter lab
 
 ## 👤 About
 
-비CS 전공(경영·마케팅) + 호텔경영 경력 → AI/ML 전환 중.
+비CS 전공(경영·마케팅·호텔경영) → AI/ML 전환 중.
 축구부 출신(고등학교)의 스포츠 도메인 지식과 AI 기술을 결합해
 **데이터와 현장 눈을 동시에 읽는 스카우트**를 목표로 합니다.
 
